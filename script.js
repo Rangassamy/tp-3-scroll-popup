@@ -10,28 +10,35 @@
 
 //-------------------------------------------------------------------//
 
+let playOnce = true;
+
 window.addEventListener("scroll", () => {
+  let scrollValue =
+    (window.scrollY + window.innerHeight) / document.body.offsetHeight;
+  //nav event
   if (window.scrollY > 0) {
     navbar.style.height = "60px";
   } else {
     navbar.style.height = "90px";
   }
+  //img event
 
-  if (window.scrollY > 250) {
+  if (scrollValue > 0.45) {
     imgImprovise.style.transform = "translateX(0)";
     imgImprovise.style.opacity = 1;
   }
-
-  if (window.scrollY > 1620) {
-    popup.style.transform = "translateX(0)";
+  //popup event
+  if (scrollValue > 0.85 && playOnce) {
+    popup.style.transform = "none";
     popup.style.opacity = 1;
+    playOnce = false;
   }
 });
 
 closeBtn.addEventListener("click", () => {
-  popup.style.transform = "translateX(-200px)";
+  popup.style.transform = "translateX(400px)";
   popup.style.opacity = 0;
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 1000);
+  //   setTimeout(() => {
+  //     popup.style.display = "none";
+  //   }, 1000);
 });
